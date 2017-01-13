@@ -94,20 +94,26 @@
  * ============================================= */
 
 /* Team Dashboard Stylings */
-#league-ranks
+
+#league-ranks-heading
 {
- 	background-color: #ffffff;
+	margin-bottom: -35px;
 }
  
-.ranking-label 
+.ranking-label
 {
-	font-size: 150%;
+	font-size: 1.5em;
+	text-align: center;
 }
 .ranking-value 
 {
-	font-size: 350%;
+	font-size: 3em;
 	font-weight: 600;
 	text-align: center;
+}
+
+.ranking-value h1 {
+	top: -30px;
 }
 
 .team-record
@@ -134,7 +140,15 @@
 	color: #ffdf02;
 }
 
-
+div#win-loss-gauge
+{
+	width: 200px;
+	height: 120px; 
+	display: inline-block;
+	float: left;
+	margin-left: -10%;
+	
+}
 /* =============================================
  * ==  IV. Homepage		========================
  * ============================================= */
@@ -165,6 +179,10 @@
 {
 	border-right: 2px solid #c6c6c6;
 	line-height: 10px;
+}
+.bg-white
+{
+	background-color: #ffffff;
 }
 
 /* Tables & Panels  */

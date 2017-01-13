@@ -30,6 +30,24 @@
     <!-- Custom CSS -->
     <link href="css/ffdatabase.css" rel="stylesheet">
 
+    
+    <!-- jQuery 3.1.1 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap 3.3.7 JavaScript-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" defer="defer"></script>
+    
+	<!-- Plotly -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js" defer="defer"></script>
+
+	<!-- Custom -->
+	<script src="js/team-dashboard.js"></script>
+	
+	<script src="resources/library/just-gauge/justgage-1.2.2/raphael-2.1.4.min.js"></script>
+	<script src="resources/library/just-gauge/justgage-1.2.2/justgage.js"></script>
+	
+	
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
