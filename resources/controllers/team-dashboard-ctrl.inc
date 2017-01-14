@@ -6,15 +6,27 @@
  * and use these functions for simplified displaying of data and queries.
  */
 
-
 include 'resources/models/team-record-ranks.inc';
 
-// Globals for team name and DB connection
+// Globals for team name and record (used in multiple functions)
 $team = $_POST['team'];
+$record = getRecord($team);
 
-$record = array();
-$record['win'] = getRecord($team, "wins");
-$record['loss'] = getRecord($team, "losses"); 
+
+function getColorArray()
+{
+	global $team;	
+	$colors  = retrieveColors($team);
+	return json_encode($colors);
+}
+
+function getColor($type)
+{
+	global $team;	
+	$colors  = retrieveColors($team);
+	$primary = $colors[0][$type];
+	return $primary;
+}
 
 /*
  * Return the team name
@@ -28,9 +40,8 @@ function teamName()
 function getWinOrLoss($result)
 {
 	global $record;
-	return $record[$result];
+	return $record[0][$record];
 }
-
 
 function showYardsBarChart()
 {
@@ -127,7 +138,7 @@ function showGauge()
 	global $record;	
 	
 	echo "
-			winLossGauge(".$record['win'].",".$record['loss']."); 
+			winLossGauge(".$record[0]['Won'].",".$record[0]['Lost']."); 
 		 ";
 }
 
@@ -138,7 +149,7 @@ function showRecord()
 {
 	global $team;
 	global $record;
-	return $record['win'] . ' - ' . $record['loss'];
+	return $record[0]['Won'] . ' - ' . $record[0]['Lost'];
 }
 
 function showOffRank()

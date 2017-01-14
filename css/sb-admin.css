@@ -4,6 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+
+/**
+ * 	NOTE: Commented out color '#999'
+ */
+
 /* Global Styles */
 
 body {
@@ -57,7 +62,7 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
-    color: #999;
+    /* color: #999; */
 }
 
 .top-nav>li>a:hover,
@@ -147,7 +152,7 @@ ul.alert-dropdown {
     display: block;
     padding: 10px 15px 10px 38px;
     text-decoration: none;
-    color: #999;
+    /* color: #999; */
 }
 
 .side-nav>li>ul>li>a:hover {

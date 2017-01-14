@@ -1,21 +1,41 @@
 <?php
 
 include 'resources/models/db.inc';
+include 'resources/models/db2.inc';
+
 
 // Global for DB
 $DB = getDB();
 
 // Globals for Views
-$TEAM_GAME_VIEW = 'TeamGame2016_View';
+//$TEAM_GAME_VIEW = 'TeamGame2016_View';
+$TEAM_GAME_VIEW = 'TeamGame2016_Summary';
 $OFFENSE_VIEW = 'Offense2016_View';
 
+// Object Version (Newest)
+$db = new DB();
+
+
+
+function retrieveColors($teamName)
+{
+	global $db;
+	$query = "SELECT PrimaryColor, SecondaryColor, TopNavColor, SideNavColor, TopNavText, SideNavText
+				FROM TeamColor
+				INNER JOIN Teams ON Teams.TeamID = TeamColor.TeamID
+				AND Teams.Name = '".$teamName."'";
+	
+	$result = $db -> select($query);
+	return $result;
+}
 
 /**
  * Get Team Win/Loss Record
+ * Note: $outcome MUST be Won or Lost (or same as given column name - used in assoc. array)
  */
-function getRecord($teamName, $outcome) {
-	
-	global $DB;
+function getRecord($teamName) 
+{
+	global $db;
 	global $TEAM_GAME_VIEW;
 	
 	$query = "SELECT 
@@ -30,23 +50,11 @@ function getRecord($teamName, $outcome) {
     				WHERE Won = 'N'
     				AND Name = '" . $teamName . "') AS Lost";
 
-	// Query database and store results
-	mysqli_query($DB, $query) or die('Error querying database. - Record');
-	$result = mysqli_query($DB, $query);
+	// Retrieve results
+	$result = $db -> select($query);
 
-	$record = array();
-	while ($row = mysqli_fetch_array($result)) {
-		$record[] = $row['Won'];
-		$record[] = $row['Lost'];
-	}
-
-	if ($outcome == "wins") {
-		return $record[0];
-	} else if ($outcome == "losses") {
-		return $record[1];
-	} else {
-		return "Record Error";
-	}
+	// Return desired result
+	return $result;
 }
 
 /**
@@ -54,35 +62,68 @@ function getRecord($teamName, $outcome) {
  */
 function getOffRank($teamName)
 {
+	// Declare globals	
 	global $TEAM_GAME_VIEW;
+	global $db;
 	
-	$query = "SELECT
-				Name,
-				((SUM(PassYds) * 0.04) + (SUM(PassTds) * 6) + (SUM(RushYds) * 0.1) + (SUM(RushTds) * 6) + (SUM(FL) * - 2) + (SUM(Ints) * - 1)) AS OffRank
-			  FROM ".$TEAM_GAME_VIEW."
-			  GROUP BY Name
-			  ORDER BY OffRank DESC";
-
-	return countRank($teamName, $query, 'Name');
+	// Create SQL counter variable for finding rank
+	$counter = "SELECT @idx := 0";
+	$db -> query($counter);
+	
+	$query = "	SELECT Rank
+				FROM
+					(SELECT 
+						@idx := @idx+1 AS Rank,
+						Name
+					FROM
+    					(SELECT
+							Name,
+							((SUM(PassYds) * 0.04) + (SUM(PassTds) * 6) + (SUM(RushYds) * 0.1) + (SUM(RushTds) * 6) + (SUM(FL) * - 2) + (SUM(Ints) * - 1)) AS OffRank
+						FROM ".$TEAM_GAME_VIEW."
+						GROUP BY Name
+						ORDER BY OffRank DESC
+						) innerTbl
+					) outerTbl
+				WHERE outerTbl.Name = '".$teamName."'";
+	
+	// Retrieve results
+	$rows = $db -> select($query);
+	return $rows[0]['Rank'];
 }
+
 
 /**
  * Get Team Defensive Rank 
  */
 function getDefRank($teamName)
 {
+	// Declare globals
 	global $TEAM_GAME_VIEW;
+	global $db;
+	
+	// Create SQL counter variable for finding rank
+	$counter = "SELECT @idx := 0";
+	$db -> query($counter);
 			
-	$query = " 
-				SELECT
-					Opponent,
-					((SUM(PassYds) * 0.04) + (SUM(PassTds) * 6) + (SUM(RushYds) * 0.1) + (SUM(RushTds) * 6) + (SUM(FL) * - 2) + (SUM(Ints) * - 1)) AS OffRank
-				FROM ".$TEAM_GAME_VIEW." 
- 				GROUP BY Opponent
- 				ORDER BY OffRank ASC
- 			";
+	$query = "  SELECT Rank
+				FROM
+					(SELECT 
+						@idx := @idx+1 AS Rank,
+						Opponent
+					FROM
+						(SELECT
+							Opponent,
+							((SUM(PassYds) * 0.04) + (SUM(PassTds) * 6) + (SUM(RushYds) * 0.1) + (SUM(RushTds) * 6) + (SUM(FL) * - 2) + (SUM(Ints) * - 1)) AS OffRank
+						FROM ".$TEAM_GAME_VIEW."
+						GROUP BY Opponent
+						ORDER BY OffRank ASC
+						) innerTbl
+					) outerTbl
+				WHERE outerTbl.Opponent = '".$teamName."'";
  		
-	return countRank($teamName, $query, 'Opponent');
+	// Retrieve results
+	$rows = $db -> select($query);
+	return $rows[0]['Rank'];
 }
 
 
@@ -92,18 +133,34 @@ function getDefRank($teamName)
 function getRushRank($teamName) 
 {
 	global $TEAM_GAME_VIEW;
+	global $db;
+	
+	// Create SQL counter variable for finding rank
+	$counter = "SELECT @idx := 0";
+	$db -> query($counter);
 	
 	$query = "
-				SELECT
-					Name,
-					((SUM(RushYds) * 0.1) + (SUM(RushTds) * 6) + (SUM(FL) * - 2)) AS OffRank
-				FROM " . $TEAM_GAME_VIEW . "
-				GROUP BY Name
-				ORDER BY OffRank DESC
-			";
-
-		return countRank($teamName, $query, 'Name');
+				SELECT Rank
+				FROM
+					(SELECT 
+						@idx := @idx+1 AS Rank,
+						Name
+					FROM
+						(SELECT
+							Name,
+							((SUM(RushYds) * 0.1) + (SUM(RushTds) * 6) + (SUM(FL) * - 2)) AS OffRank
+						FROM ".$TEAM_GAME_VIEW."
+						GROUP BY Name
+						ORDER BY OffRank DESC
+						) innerTbl
+					) outerTbl
+				WHERE outerTbl.Name = '".$teamName."'";
+	
+	// Retrieve results
+	$rows = $db -> select($query);
+	return $rows[0]['Rank'];
 }
+
 
 /**
  * Get Team Passing Rank
@@ -111,51 +168,34 @@ function getRushRank($teamName)
 function getPassRank($teamName)
 {
 	global $TEAM_GAME_VIEW;		
-				
+	global $db;
+	
+	// Create SQL counter variable for finding rank
+	$counter = "SELECT @idx := 0";
+	$db -> query($counter);	
+	
 	$query = "
-				SELECT
-					Name,
-					((SUM(PassYds) * 0.1) + (SUM(PassTds) * 6) + (SUM(Ints) * - 2)) AS OffRank
- 				FROM ".$TEAM_GAME_VIEW." 
-				GROUP BY Name
-				ORDER BY OffRank DESC
-			";
-				
-	return countRank($teamName, $query, 'Name');
+				SELECT Rank
+				FROM
+					(SELECT 
+						@idx := @idx+1 AS Rank,
+						Name
+					FROM
+						(SELECT
+							Name,
+							((SUM(PassYds) * 0.1) + (SUM(PassTds) * 6) + (SUM(Ints) * - 2)) AS OffRank
+						FROM ".$TEAM_GAME_VIEW."
+						GROUP BY Name
+						ORDER BY OffRank DESC
+						) innerTbl
+					) outerTbl
+				WHERE outerTbl.Name = '".$teamName."'";
+
+	// Retrieve results
+	$rows = $db -> select($query);
+	return $rows[0]['Rank'];
 }
 	
-	
-/** 
- * Count Rank - Return a team's league ranking from an ordered query.
- * param teamName - Name of team for ranking
- * query - Ordered SQL query
- * columnName - Name of the column containing the team names (look in this column for given team name)
- */
-function countRank($teamName, $query, $columnName)
-{
-	global $DB;
-	global $TEAM_GAME_VIEW;
-	
-	// Query database and store results
-	mysqli_query($DB, $query) or die('Error querying database. - Rank');
-	$result = mysqli_query($DB, $query);
-	
-	// Look for team and return rank (from ordered DB query ONLY)
-	$counter = 1;
-	while ($row = mysqli_fetch_array($result)) 
-	{
-		if ($teamName == $row[$columnName])
-		{
-			return $counter;
-		}
-		$counter++;
-	}
-		
-	// Team not found (return -1 for now)
-	return -1; 	
-}
-
-
 /**
  * 
  */
@@ -163,6 +203,7 @@ function getYardTotals($teamName)
 {
 	global $DB;
 	global $TEAM_GAME_VIEW;
+	global $db;
 	
 	$query = "SELECT
   			  (
@@ -185,13 +226,17 @@ function getYardTotals($teamName)
          			FROM ".$TEAM_GAME_VIEW." 
          			WHERE Opponent = '".$teamName."'
      			) AS RushAllowed";
-				
-		// Query database and store results
+	
+	$rows = $db -> select($query);
+	return $rows[0];		
+		 
+		/*/ Query database and store results
 		mysqli_query($DB, $query) or die('Error querying database. - Yards');
 		$result = mysqli_query($DB, $query);
 		
 		$row = mysqli_fetch_array($result);
 		return $row; 
+		*/
 }
 
 

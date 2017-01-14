@@ -262,6 +262,69 @@ function winLossGauge(win, loss)
 	}
 }
 
+//.navbar-header a, .navbar-right a
+
+function setPageColor(arr)
+{
+	// Top Nav Color
+	var topNav = document.getElementsByClassName('navbar-fixed-top');
+	$(topNav[0]).css('background-color', "#"+ arr[0]['TopNavColor']);
+	
+	// Top Nav Left Text
+	var topNavLeft = document.getElementsByClassName('navbar-header');
+	$(topNavLeft[0]).css('color', "#"+ arr[0]['TopNavText']);
+	
+	// Top Nav Right Text
+	var topNavRight = document.getElementsByClassName('navbar-right');
+	$(topNavRight[0]).css('color', "#"+ arr[0]['TopNavText']);
+	
+	// Side Bar Color
+	var elements = document.getElementsByClassName("side-nav");
+	var sideNav = elements[0];
+	$(sideNav).css('background-color', "#"+ arr[0]['SideNavColor']);
+	
+	// Side Bar Link Text
+	var sideNav = document.getElementsByClassName("side-nav");
+	$(sideNav[0]).css('color', "#"+ arr[0]['SideNavText']);
+	var teamLinks = document.getElementsByClassName("team-link");
+	$(teamLinks).css('color', "#"+ arr[0]['SideNavText']);
+}
+
+/**
+ * Set the page color to match Team 
+ */
+function setPageColorOLD(primaryColor, secondaryColor)
+{
+	secondaryColor = secondaryColor || "ffffff";
+	secondaryColor = "#" + secondaryColor;
+	primaryColor = "#"+ primaryColor;
+	
+	// Side Bar
+	var elements = document.getElementsByClassName("side-nav");
+	var sideNav = elements[0];
+	$(sideNav).css('background-color', secondaryColor);
+	//$(sideNav).css('background-color', 'black');
+	
+	// Change color of top nav
+	var topNav = document.getElementsByClassName('navbar-fixed-top');
+	$(topNav[0]).css('background-color', primaryColor);
+	//$(topNav[0]).css('background-color', '#FFB612');
+	
+	
+	// Change color of anchor tags in sidebar		
+	var sideNav = document.getElementsByClassName("side-nav");
+	$(sideNav[0]).css('color', primaryColor);
+	//$(sideNav[0]).css('color', '#FFB612');
+	
+	
+	// Change color of text in team dashboard links (they are buttons)
+	var teamLinks = document.getElementsByClassName("team-link");
+	$(teamLinks).css('color', primaryColor);
+	//$(teamLinks).css('color', '#FFB612');
+	
+}
+
+
 /**
  * Set the league ranking colors on green-red scale 
  */

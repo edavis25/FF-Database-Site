@@ -26,6 +26,13 @@
 /* =============================================
  * ==  I. Body		============================
  * ============================================= */
+
+/* Force anchor tags to inherit text color from parent (overrides Bootstrap style) */
+a
+{
+	/* color: inherit !important; */
+}
+
 #page-wrapper
 {
 	/* background-color: #f8f8f8; */
@@ -37,14 +44,15 @@
  * ==  II. Header & Nav		====================
  * ============================================= */
 
-/* Top Bar */
-.navbar
-{
-    background-color: #337ab7 !important;
-}
+/* Text in top nav-bar */
 .navbar-header a, .navbar-right a
 { 
-    color: white !important;
+    /* color: white !important; */
+   color: inherit;
+}
+.navbar-header, .navbar-right
+{
+	color: white;
 }
 
 /* Side Nav */
@@ -53,17 +61,34 @@
 	/* background-color: #f8f8f8; */
 	/* border-color: #e7e7e7; */
 	background-color: #ffffff;
+	/* background-color: #9b2743; */
 	border: 2px solid #e7e7e7;
 }
-.side-nav a, .side-nav li 
+
+.side-nav a
 {
-	color: #337ab7 !important;
+	color: inherit !important;
+}
+.side-nav 
+{
+	color: #337ab7;
+	/* color: white !important; */
+}
+.side-nav a
+{
+	font-weight: 600;
 }
 .navbar .active a 
 {
 	background-color: #e7e7e7 !important;
 }
 
+/* Top Bar */
+.navbar-fixed-top
+{
+   background-color: #337ab7 /*!important*/;
+   /* background-color: #9b2743 !important; */
+}
 /* Nav-bar Team Dashboard Links */
 .team-link
 {
@@ -214,11 +239,8 @@ div#yards-bar-chart
 }
 .panel-heading
 {
-	background-color: #ffffff !important;
+	/* background-color: #ffffff !important; */
 }
-
-
-
 
 
 
@@ -226,3 +248,26 @@ div#yards-bar-chart
 {
 	height: 300px;
 }
+
+
+
+.navbar-header a, .navbar-right a
+{
+	color: inherit !important;
+}
+.navbar-header, .navbar-right
+{
+	color: white;
+}
+
+
+.navbar-right a
+{
+	color: inherit !important;
+}
+.navbar-right
+{
+	color: white;	
+}
+
+

@@ -13,6 +13,7 @@
 	========== TEAM DASHBOARD CONTENT ================
 	================================================== -->
 	
+
 	<!-- Row 1 (Team name + record) -->
 	<div class="row">
     	<div class="col-xs-12 col-sm-5 col-md-4 col-xl-3">
@@ -26,6 +27,8 @@
 	
 	
 	
+
+
 	<!-- Row 2 (League rankings) -->
 	<div class="row">
 		<div class="panel bg-white">
@@ -98,6 +101,19 @@
 		</div> <!-- End panel -->
 	</div> <!-- End row 2 -->
 
+
+	<!-- Set colors early before document ready -->
+	<script>
+		setRankColors();
+		//setPageColor("<?php echo getColor('PrimaryColor'); ?>", "<?php echo getColor('SecondaryColor'); ?>");
+		//var primary = "<?php echo getColor('PrimaryColor'); ?>";
+		//setPageColor(primary);
+		
+		var arr = <?php echo getColorArray(); ?>;
+		setPageColor(arr);
+	</script>
+	
+	
 	<!-- Row 3 -->
 	<div class="row">
 		<div class="col-xs-12">
@@ -164,16 +180,21 @@
 		</div>
 	</div>
 
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+
+	<script src="https://code.highcharts.com/highcharts.js" defer="defer"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js" defer="defer"></script>
 	<script src="resources/library/jquery.visible.min.js"></script>
 	<!-- Call functions from the team-dashboard.js file -->
+	
 	<script>
 	$(document).ready(function()
 	{
-		setRankColors();
+		setTimeout(function() { <?php showGauge(); ?> }, 1000);
+		//setRankColors();
 		timelapseChart();
-		<?php showGauge(); ?>
+		
 		<?php showYardsBarChart(); ?>
 		<?php showPointsBarChart(); ?>
 		
@@ -192,7 +213,7 @@
 				ydsDone = true;
 			}
 		});
-	
+
 	});
 	</script>
 	
