@@ -15,11 +15,11 @@
 	
 	<!-- Row 1 (Team name + record) -->
 	<div class="row">
-    	<div class="col-xs-12 col-sm-5 col-md-3">
+    	<div class="col-xs-12 col-sm-5 col-md-4 col-xl-3">
     		<h1><b><?php echo teamName(); ?></b> <small>Dashboard</small></h1>	
         	<h3 class="team-record"><?php echo showRecord(); ?></h3>	
         </div>
-        <div class="col-xs-12 col-sm-7 col-md-9">
+        <div class="col-xs-12 col-sm-7 col-md-8 col-xl-9">
         	<div class="col-xs-8" id="win-loss-gauge" class="gauge"></div>
         </div>
 	</div> <!-- End Row 1 -->
@@ -123,33 +123,50 @@
 	<div class="row">
 		
 		<!-- Season Yard Totals bar graph -->
-		<div class="col-md-4">
-			<div class="panel bg-white">
-				<div class="panel-heading">
-					<h3 class="panel-title"><i class="glyphicon glyphicon-align-left"></i> Season Yardage Totals</h3>
-				</div>
-				<div class="panel-body">
-					<div id="yards-bar-chart"></div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="panel bg-white">
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="glyphicon glyphicon-align-left"></i> Total Points</h3>
+					</div>
+					<div class="panel-body">
+						<div id="points-bar-chart" style="height: 200px; margin-top: -26px; margin-bottom: -18px"></div>
+					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="panel bg-white">
+					<div class="panel-heading">
+						<h3 class="panel-title"><i class="glyphicon glyphicon-align-left"></i> Season Yardage Totals</h3>
+					</div>
+					<div class="panel-body">
+						<div id="yards-bar-chart" style="height: 200px;"></div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 		
 		<!-- Offense Season Leaders -->
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<div class="panel bg-white">
 				<div class="panel-heading">
 					<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Offensive Leaders</h3>
 				</div>
 				<div class="panel-body">
-					<table class="table table-striped">
-						<?php fillOffLeadersTbl(); ?>
-					</table>
+					<div class="table-responsive">
+						<table class="table table-striped" id="offense-leaders-table">
+							<?php fillOffLeadersTbl(); ?>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="resources/library/jquery.visible.min.js"></script>
 	<!-- Call functions from the team-dashboard.js file -->
 	<script>
 	$(document).ready(function()
@@ -158,6 +175,24 @@
 		timelapseChart();
 		<?php showGauge(); ?>
 		<?php showYardsBarChart(); ?>
+		<?php showPointsBarChart(); ?>
+		
+		var ptsDone = false;
+		var ydsDone = false;
+		$(document).on('scroll', function()
+		{
+			if ($('#points-bar-chart:visible').visible( true, true ) && !ptsDone)
+			{
+				<?php showPointsBarChart(); ?>
+				ptsDone = true;
+			}
+			if ($('#yards-bar-chart:visible').visible( true, true ) && !ydsDone)
+			{
+				<?php showYardsBarChart(); ?>
+				ydsDone = true;
+			}
+		});
+	
 	});
 	</script>
 	

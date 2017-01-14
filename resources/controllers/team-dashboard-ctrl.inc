@@ -42,6 +42,15 @@ function showYardsBarChart()
 		";
 }
 
+function showPointsBarChart()
+{
+	global $team;
+	$arr = getSeasonPoints($team);
+	echo "
+			pointsBarChart(".json_encode($arr).");	
+		";
+}
+
 
 function fillOffLeadersTbl()
 {
@@ -51,32 +60,36 @@ function fillOffLeadersTbl()
 	
 	/***** PASSING *****/
 	$tblString = "<tr><th><b>Passing</b></th><th><b>YDs</b></th><th><b>TDs</b></th><th><b>COMP</b></th><th><b>ATT</b></th><th><b>COMP%</b></th></tr>";
-	
 	// Array of desired columns for passing
 	$offCol = array("Name", "PassYds", "PassTD", "PassCmp", "PassAtt");
-	
-	// Get array of passing results
-	$offResult = getSeasonLeader($team, $offCol, 'PassYds', 2);
+	// Get results
+	$offResult = getSeasonLeader($team, $offCol, 'PassYds', 1);
 
-	$tblString .= buildTableRow($offResult, 3, 4);
+	$tblString .= buildTableRow($offResult, 3, 4, 'percentageOf');
 	
 	
 	/***** RUSHING *****/
 	$tblString .= "<tr><th><b>Rushing</b></th><th><b>YDs</b></th><th><b>TDs</b></th><th><b>FUMB</b></th><th><b>ATT</b></th><th><b>YDs/ATT</b></th></tr>";
-	
 	// Array of desired columns for rushing
 	$defCol = array("Name", "RushYds", "RushTD", "Fmb", "RushAtt");
-	
-	// Get array of rushing results
+	// Get results
 	$defResult = getSeasonLeader($team, $defCol, 'RushYds', 2);
 	
-	$tblString .= buildTableRow($defResult, 1, 4);
+	$tblString .= buildTableRow($defResult, 1, 4, 'yardsPer');
 	
-
+	/***** RECEIVING *****/
+	$tblString .= "<tr><th><b>Receiving</b></th><th><b>YDs</b></th><th><b>TDs</b></th><th><b>TGT</b></th><th><b>REC</b></th><th><b>YDs/REC</b></th></tr>";
+	// Array of desired columns for receiving
+	$recCol = array("Name", "RecYds", "RecTds", "RecTgt", "Rec");
+	// Get results
+	$recResult = getSeasonLeader($team, $recCol, 'RecYds', 3);
+	
+	$tblString .= buildTableRow($recResult, 1, 4, 'yardsPer');
+	
 	echo $tblString;
 }
 
-function buildTableRow($arr, $col1, $col2)
+function buildTableRow($arr, $col1, $col2, $func)
 {
 	$result = "";
 	for ($i = 0; $i < sizeof($arr); $i++)
@@ -89,7 +102,8 @@ function buildTableRow($arr, $col1, $col2)
 			$result.="</td>";
 		}
 		$result.= "<td>";
-		$result.= number_format(percentageOf($arr[$i][$col1], $arr[$i][$col2]), 1);
+		//$result.= number_format(percentageOf($arr[$i][$col1], $arr[$i][$col2]), 1);
+		$result .= number_format($func($arr[$i][$col1], $arr[$i][$col2]), 2);
 		$result.= "</td>";
 		$result.= "</tr>";
 	}
@@ -99,6 +113,10 @@ function buildTableRow($arr, $col1, $col2)
 function percentageOf($num1, $num2)
 {
 	return (($num1 / $num2) * 100);
+}
+function yardsPer($num1, $num2)
+{
+	return ($num1 / $num2);
 }
 
 /**

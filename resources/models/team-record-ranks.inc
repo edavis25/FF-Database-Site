@@ -238,3 +238,24 @@ function getSeasonLeader($teamName, $columnArray, $orderBy, $limit)
 	}
 	return $returnArr;
 }
+
+function getSeasonPoints($teamName)
+{
+	global $DB;
+	global $TEAM_GAME_VIEW;
+	
+	$query = "
+				SELECT
+					SUM(TotalScore) AS PtsFor,
+					SUM(OppScore) AS PtsAgst
+				FROM ".$TEAM_GAME_VIEW."
+				WHERE Name = '".$teamName."'
+			 ";
+			 
+	// Query database and store results
+	mysqli_query($DB, $query) or die('Error querying database. - Yards');
+	$result = mysqli_query($DB, $query);
+		
+	$row = mysqli_fetch_array($result);
+	return $row; 
+}

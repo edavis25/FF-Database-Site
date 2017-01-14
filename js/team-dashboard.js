@@ -8,9 +8,123 @@ $(document).ready(function()
 	
 
 });
+function yardsBarChart(arr) 
+{
+	Highcharts.chart('yards-bar-chart', {
+		chart : {
+			type : 'bar'
+		},
+		title : {
+
+			text : ''
+		},
+		subtitle : {
+			text : ''
+		},
+		xAxis : {
+			categories : ['Pass<br />Yards', 'Rush<br />Yards'],
+			title : {
+				text : null
+			}
+		},
+		yAxis : {
+			min : 0,
+			title : {
+				text : 'Total Yards',
+				align : 'high'
+			},
+			labels : {
+				overflow : 'justify'
+			}
+		},
+		tooltip : {
+			valueSuffix : ''
+		},
+		plotOptions : {
+			bar : {
+				dataLabels : {
+					enabled : true
+				}
+			}
+		},
+		credits : {
+			enabled : false
+		},
+		series : [{
+			showInLegend: false,
+			name : 'Earned',
+			data : [parseInt(arr['PassEarned']), parseInt(arr['RushEarned'])],
+			color: '#00ba31'
+		}, {
+			showInLegend: false,
+			name : 'Allowed',
+			data : [parseInt(arr['PassAllowed']), parseInt(arr['RushAllowed'])],
+			color: '#dc030d'
+		}]
+	});
+}
 
 
-function yardsBarChart(arr)
+function pointsBarChart(arr) 
+{
+	Highcharts.chart('points-bar-chart', {
+		chart : {
+			type : 'bar'
+		},
+		title : {
+
+			text : ''
+		},
+		subtitle : {
+			text : ''
+		},
+		xAxis : {
+			categories : ['Points<br />Scored'],
+			title : {
+				text : null
+			}
+		},
+		yAxis : {
+			min : 0,
+			title : {
+				text : 'Total Points',
+				align : 'high'
+			},
+			labels : {
+				overflow : 'justify'
+			}
+		},
+		tooltip : {
+			valueSuffix : ''
+		},
+		plotOptions : {
+			bar : {
+				dataLabels : {
+					enabled : true
+				}
+			}
+		},
+		legend : {
+			margin: -15
+		},
+		credits : {
+			enabled : false
+		},
+		series : [{
+			//showInLegend: false,
+			name : 'For',
+			data : [parseInt(arr[0])],
+			color: '#00ba31'
+		}, {
+			//showInLegend: false,
+			name : 'Against',
+			data : [parseInt(arr[1])],
+			color: '#dc030d'
+		}]
+	});
+}
+
+function yardsBarChartOLD(arr)
 {
 	
 	var rushTrace = 
@@ -69,8 +183,8 @@ function yardsBarChart(arr)
 		// Margin removes empy chart title space
 		margin: 
 		{
-			t: 45,
-    		pad: 4
+			t: 0,
+    		pad: 2
   		},
 		barmode: 'stack'
 	};

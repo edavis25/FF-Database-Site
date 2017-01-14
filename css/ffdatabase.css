@@ -147,7 +147,19 @@ div#win-loss-gauge
 	display: inline-block;
 	float: left;
 	margin-left: -10%;
-	
+}
+
+div#yards-bar-chart
+{
+	/* height: 357px; */
+	height: 200px;
+	margin-top: -26px;
+	margin-bottom: -18px;
+}
+
+#offense-leaders-table
+{
+	font-size: 11px;
 }
 /* =============================================
  * ==  IV. Homepage		========================
