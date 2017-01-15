@@ -282,6 +282,11 @@ function setPageColor(arr)
 	var elements = document.getElementsByClassName("side-nav");
 	var sideNav = elements[0];
 	$(sideNav).css('background-color', "#"+ arr[0]['SideNavColor']);
+	//$(sideNav).css('border', '1px solid #'+arr[0]['SecondaryColor']);
+	//$(sideNav).css('border', '1px solid #'+arr[0]['SecondaryColor']);
+	$(sideNav).css('border-color', '#'+ arr[0]['SecondaryColor']);
+	$(sideNav).css('border-right', '1px solid #'+arr[0]['SecondaryColor']);
+	
 	
 	// Side Bar Link Text
 	var sideNav = document.getElementsByClassName("side-nav");
