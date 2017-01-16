@@ -13,19 +13,11 @@ $team = $_POST['team'];
 $record = getRecord($team);
 
 
-function getColorArray()
+function getTeamTheme()
 {
 	global $team;	
-	$colors  = retrieveColors($team);
+	$colors  = retrieveTeamTheme($team);
 	return json_encode($colors);
-}
-
-function getColor($type)
-{
-	global $team;	
-	$colors  = retrieveColors($team);
-	$primary = $colors[0][$type];
-	return $primary;
 }
 
 /*
@@ -74,7 +66,7 @@ function fillOffLeadersTbl()
 	// Array of desired columns for passing
 	$offCol = array("Name", "PassYds", "PassTD", "PassCmp", "PassAtt");
 	// Get results
-	$offResult = getSeasonLeader($team, $offCol, 'PassYds', 1);
+	$offResult = getSeasonLeader($team, $offCol, 'PassYds', 2);
 
 	$tblString .= buildTableRow($offResult, 3, 4, 'percentageOf');
 	
@@ -93,7 +85,7 @@ function fillOffLeadersTbl()
 	// Array of desired columns for receiving
 	$recCol = array("Name", "RecYds", "RecTds", "RecTgt", "Rec");
 	// Get results
-	$recResult = getSeasonLeader($team, $recCol, 'RecYds', 3);
+	$recResult = getSeasonLeader($team, $recCol, 'RecYds', 4);
 	
 	$tblString .= buildTableRow($recResult, 1, 4, 'yardsPer');
 	

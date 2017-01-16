@@ -3,7 +3,6 @@
 include 'resources/models/db.inc';
 include 'resources/models/db2.inc';
 
-
 // Global for DB
 $DB = getDB();
 
@@ -17,12 +16,12 @@ $db = new DB();
 
 
 
-function retrieveColors($teamName)
+function retrieveTeamTheme($teamName)
 {
 	global $db;
-	$query = "SELECT PrimaryColor, SecondaryColor, TopNavColor, SideNavColor, TopNavText, SideNavText
-				FROM TeamColor
-				INNER JOIN Teams ON Teams.TeamID = TeamColor.TeamID
+	$query = "SELECT PrimaryColor, SecondaryColor, TopNavColor, TopNavText, SideNavText, LogoURL
+				FROM TeamTheme
+				INNER JOIN Teams ON Teams.TeamID = TeamTheme.TeamID
 				AND Teams.Name = '".$teamName."'";
 	
 	$result = $db -> select($query);
@@ -58,7 +57,7 @@ function getRecord($teamName)
 }
 
 /**
- * Get Team Offesnive Rank
+ * Get Team Offensive Rank
  */
 function getOffRank($teamName)
 {
@@ -228,18 +227,12 @@ function getYardTotals($teamName)
      			) AS RushAllowed";
 	
 	$rows = $db -> select($query);
-	return $rows[0];		
-		 
-		/*/ Query database and store results
-		mysqli_query($DB, $query) or die('Error querying database. - Yards');
-		$result = mysqli_query($DB, $query);
-		
-		$row = mysqli_fetch_array($result);
-		return $row; 
-		*/
+	return $rows[0];
 }
 
-
+/*
+ * TODO: Rebuild this gross shit
+ */
 function getSeasonLeader($teamName, $columnArray, $orderBy, $limit)
 {
 	// Get global references to Database and Table
@@ -284,6 +277,9 @@ function getSeasonLeader($teamName, $columnArray, $orderBy, $limit)
 	return $returnArr;
 }
 
+/**
+ * TODO: Rebuild this gross shit
+ */
 function getSeasonPoints($teamName)
 {
 	global $DB;

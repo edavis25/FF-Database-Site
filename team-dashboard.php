@@ -21,7 +21,7 @@
         	<h3 class="team-record"><?php echo showRecord(); ?></h3>	
         </div>
         <div class="col-xs-12 col-sm-7 col-md-8 col-xl-9">
-        	<div class="col-xs-8" id="win-loss-gauge" class="gauge"></div>
+        	<div class="col-xs-8 gauge" id="win-loss-gauge"></div>
         </div>
 	</div> <!-- End Row 1 -->
 	
@@ -105,12 +105,11 @@
 	<!-- Set colors early before document ready -->
 	<script>
 		setRankColors();
-		//setPageColor("<?php echo getColor('PrimaryColor'); ?>", "<?php echo getColor('SecondaryColor'); ?>");
-		//var primary = "<?php echo getColor('PrimaryColor'); ?>";
-		//setPageColor(primary);
 		
-		var arr = <?php echo getColorArray(); ?>;
-		setPageColor(arr);
+		var arr = <?php echo getTeamTheme(); ?>;
+		setTeamTheme(arr);
+		
+		
 	</script>
 	
 	
@@ -119,7 +118,7 @@
 		<div class="col-xs-12">
 			<div class="panel bg-white">
 				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Current Season</h1>
+					<h3 class="panel-title"><i class="fa fa-line-chart fa-fw"></i> Current Season</h1>
 				</div>
 				<div class="panel-body">
 					<div class="row">

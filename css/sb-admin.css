@@ -140,7 +140,7 @@ ul.alert-dropdown {
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #e7e7e7 !important;
+        background-color: #e7e7e7;
     }
 }
 

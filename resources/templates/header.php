@@ -29,6 +29,7 @@
     
     <!-- Custom CSS -->
     <link href="css/ffdatabase.css" rel="stylesheet">
+    <!-- link href="css/ffdatabase-alt.css" rel="stylesheet" -->
 
     
     <!-- jQuery 3.1.1 -->

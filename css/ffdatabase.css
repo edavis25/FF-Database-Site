@@ -76,7 +76,7 @@ a
 {
 	color: #337ab7;
 	border: none;
-	margin-top: -1px;
+	margin-top: 4px;
 	/* color: white !important; */
 }
 .side-nav a
@@ -85,7 +85,20 @@ a
 }
 .navbar .active a 
 {
-	background-color: #e7e7e7 !important;
+	/*background-color: #e7e7e7 ;*/
+	/*background-color: purple !important;*/
+}
+.active a
+{
+	/*
+	background-color: yellow !important;
+	color: blue !important;
+	*/
+}
+
+.active
+{
+	background-color: pink !important;
 }
 
 /* Top Bar */
@@ -94,7 +107,9 @@ a
    background-color: #337ab7 /*!important*/;
    /* background-color: #9b2743 !important; */
    border: none;
-}
+   height: 55px;
+}   
+
 /* Nav-bar Team Dashboard Links */
 .team-link
 {
@@ -103,6 +118,7 @@ a
 	text-align: left;
 	width: 100%;
 }
+
 .navbar tr:hover
 {
 	background-color: #e7e7e7;
@@ -275,5 +291,21 @@ div#yards-bar-chart
 {
 	color: white;	
 }
+
+a:hover
+{
+	/* color: yellow !important; */
+	
+}
+.navbar-collapse .side-nav .active-container a:hover
+{
+	/* background-color: yellow !important; */
+}
+.side-nav li>a:hover
+{
+	/* background-color: yellow !important; */
+}
+
+
 
 

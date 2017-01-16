@@ -2,12 +2,7 @@
  * Javascript Functions for the Team Dashboard
  */
 
-$(document).ready(function()
-{
-	//setRankColors();
-	
 
-});
 function yardsBarChart(arr) 
 {
 	Highcharts.chart('yards-bar-chart', {
@@ -262,71 +257,43 @@ function winLossGauge(win, loss)
 	}
 }
 
-//.navbar-header a, .navbar-right a
-
-function setPageColor(arr)
-{
-	// Top Nav Color
-	var topNav = document.getElementsByClassName('navbar-fixed-top');
-	$(topNav[0]).css('background-color', "#"+ arr[0]['TopNavColor']);
-	
-	// Top Nav Left Text
-	var topNavLeft = document.getElementsByClassName('navbar-header');
-	$(topNavLeft[0]).css('color', "#"+ arr[0]['TopNavText']);
-	
-	// Top Nav Right Text
-	var topNavRight = document.getElementsByClassName('navbar-right');
-	$(topNavRight[0]).css('color', "#"+ arr[0]['TopNavText']);
-	
-	// Side Bar Color
-	var elements = document.getElementsByClassName("side-nav");
-	var sideNav = elements[0];
-	$(sideNav).css('background-color', "#"+ arr[0]['SideNavColor']);
-	//$(sideNav).css('border', '1px solid #'+arr[0]['SecondaryColor']);
-	//$(sideNav).css('border', '1px solid #'+arr[0]['SecondaryColor']);
-	$(sideNav).css('border-color', '#'+ arr[0]['SecondaryColor']);
-	$(sideNav).css('border-right', '1px solid #'+arr[0]['SecondaryColor']);
-	
-	
-	// Side Bar Link Text
-	var sideNav = document.getElementsByClassName("side-nav");
-	$(sideNav[0]).css('color', "#"+ arr[0]['SideNavText']);
-	var teamLinks = document.getElementsByClassName("team-link");
-	$(teamLinks).css('color', "#"+ arr[0]['SideNavText']);
-}
-
 /**
- * Set the page color to match Team 
+ * Set team page theme. Configure the colors of the navigation bars unique for each team based on DB data.
+ * @param {Array} arr - Associative array containing the team's hex values/URLs from the DB  
  */
-function setPageColorOLD(primaryColor, secondaryColor)
+function setTeamTheme(arr)
 {
-	secondaryColor = secondaryColor || "ffffff";
-	secondaryColor = "#" + secondaryColor;
-	primaryColor = "#"+ primaryColor;
+	// Top navbar color
+	$('.navbar-fixed-top').css('background-color', "#"+ arr[0]['TopNavColor']);
 	
-	// Side Bar
-	var elements = document.getElementsByClassName("side-nav");
-	var sideNav = elements[0];
-	$(sideNav).css('background-color', secondaryColor);
-	//$(sideNav).css('background-color', 'black');
+	// Top navbar left hand text color
+	$('.navbar-header').css('color', "#"+ arr[0]['TopNavText']);
 	
-	// Change color of top nav
-	var topNav = document.getElementsByClassName('navbar-fixed-top');
-	$(topNav[0]).css('background-color', primaryColor);
-	//$(topNav[0]).css('background-color', '#FFB612');
+	// Top navbar right hand text color
+	$('.navbar-right').css('color', "#"+ arr[0]['TopNavText']);
 	
+	// Side navbar border color	
+	$(".side-nav").css('border-color', '#'+ arr[0]['SecondaryColor']);
+	$(".side-nav").css('border-right', '1px solid #'+arr[0]['SecondaryColor']);
 	
-	// Change color of anchor tags in sidebar		
-	var sideNav = document.getElementsByClassName("side-nav");
-	$(sideNav[0]).css('color', primaryColor);
-	//$(sideNav[0]).css('color', '#FFB612');
+	// Side navbar main anchor links text
+	$('.side-nav').css('color', "#"+ arr[0]['SideNavText']);
 	
+	// Side navbar team name dashboard links (these are buttons)
+	$('.team-link').css('color', "#"+ arr[0]['SideNavText']);
 	
-	// Change color of text in team dashboard links (they are buttons)
-	var teamLinks = document.getElementsByClassName("team-link");
-	$(teamLinks).css('color', primaryColor);
-	//$(teamLinks).css('color', '#FFB612');
+	// Set team logo image
+	var img = document.getElementById("team-logo").src= arr[0]['LogoURL'];
 	
+	// Set active tab background color
+	$("#dashboard").css('background-color', "#"+ arr[0]['TopNavColor'], '!important');
+	
+	// Set active tab text color (the <a> text inherits the color given to the <li> active container class)
+	var active = document.getElementsByClassName("active-container");
+	$(active[1]).css('color', "#"+ arr[0]['TopNavText'], '!important');
+	
+	// Add a new style class for anchor hovers (only way I could figure out how to change hover color)
+	$("<style type='text/css'> a:hover { background-color: #"+ arr[0]['TopNavColor'] +" !important; color: #"+ arr[0]['TopNavText'] +" !important;} </style>").appendTo("head");
 }
 
 
