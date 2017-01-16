@@ -251,8 +251,8 @@
 		$("#home").css('background-color', '#e7e7e7', '!important');
 		
 		// Change the color of the <li> container class - the anchor tag text inherits this color
-		var active = document.getElementsByClassName("active-container");
-		$(active[0]).css('color', '#337ab7', '!important');
+		//var active = document.getElementsByClassName("active-container");
+		//$(active[0]).css('color', '#337ab7', '!important');
 	</script>
 	
 	<?php

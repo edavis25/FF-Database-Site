@@ -8,8 +8,8 @@
  * Yellow Rank - ffdf02
  * Orange Rank - ff6c0a
  * Red Rank - dc030d
- * Blue - 337ab7
- * 
+ * Blue -  (OLD: 0a0044)
+ * 0a0044
  * 
  * CONTENTS
  * =============
@@ -31,6 +31,7 @@
 a
 {
 	/* color: inherit !important; */
+	color: #0a0044;
 }
 
 #page-wrapper
@@ -74,37 +75,24 @@ a
 }
 .side-nav 
 {
-	color: #337ab7;
+	color: #0a0044;
 	border: none;
 	margin-top: 4px;
 	/* color: white !important; */
-}
-.side-nav a
-{
-	font-weight: 600;
-}
-.navbar .active a 
-{
-	/*background-color: #e7e7e7 ;*/
-	/*background-color: purple !important;*/
-}
-.active a
-{
-	/*
-	background-color: yellow !important;
-	color: blue !important;
-	*/
+	/* font-family: "Lucida Grande", Tahoma; */
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: 500;
 }
 
-.active
+.side-nav li:hover
 {
-	background-color: pink !important;
+	background-color: #e7e7e7;
 }
 
 /* Top Bar */
 .navbar-fixed-top
 {
-   background-color: #337ab7 /*!important*/;
+   background-color: #0a0044 /*!important*/;
    /* background-color: #9b2743 !important; */
    border: none;
    height: 55px;
@@ -292,19 +280,6 @@ div#yards-bar-chart
 	color: white;	
 }
 
-a:hover
-{
-	/* color: yellow !important; */
-	
-}
-.navbar-collapse .side-nav .active-container a:hover
-{
-	/* background-color: yellow !important; */
-}
-.side-nav li>a:hover
-{
-	/* background-color: yellow !important; */
-}
 
 
 

@@ -97,7 +97,8 @@
 		<ul class="nav navbar-nav side-nav bg-swap">
 			
 			<li class="active-container">
-				<a href="index.php" id="home"><i class="fa fa-fw fa-home"></i> Home</a></li>
+				<a href="index.php" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+			</li>
 			
 			<li class="active-container">
 				<a href="#" data-toggle="collapse" data-target="#team-links" id="dashboard"><i class="fa fa-fw fa-dashboard"></i> Team Dashboards <i class="fa fa-fw fa-caret-down"></i></a>
