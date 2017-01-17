@@ -20,6 +20,13 @@ function getTeamTheme()
 	return json_encode($colors);
 }
 
+function getTurnovers()
+{
+	global $team;
+	$turnovers = retrieveTurnovers($team);
+	return json_encode($turnovers);
+}
+
 /*
  * Return the team name
  */

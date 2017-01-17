@@ -26,9 +26,6 @@
 	</div> <!-- End Row 1 -->
 	
 	
-	
-
-
 	<!-- Row 2 (League rankings) -->
 	<div class="row">
 		<div class="panel bg-white">
@@ -107,25 +104,24 @@
 		setRankColors();
 		
 		var arr = <?php echo getTeamTheme(); ?>;
-		setTeamTheme(arr);
-		
-		
+		setTeamTheme(arr);	
 	</script>
 	
 	
 	<!-- Row 3 -->
-	<div class="row">
+	<div class="row" >
 		<div class="col-xs-12">
-			<div class="panel bg-white">
+			<div class="panel bg-white" >
 				<div class="panel-heading">
 					<h3 class="panel-title"><i class="fa fa-line-chart fa-fw"></i> Current Season</h1>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-xs-12 col-sm-8 border-right">
-							<div id="timelapse-chart"></div>
+							<div id="timelapse-chart" style="height: 350px" ></div>
 						</div>
 						<div class="col-xs-12 col-sm-4">
+							<div id="turnovers-pie-chart" style="height: 350px"></div>
 							<p>Legend</p>
 						</div>
 					</div>
@@ -187,6 +183,13 @@
 	<script src="resources/library/jquery.visible.min.js"></script>
 	<!-- Call functions from the team-dashboard.js file -->
 	
+	<script src="js/team-turnovers-pie.js"></script>
+	
+	<script>
+	
+	
+	</script>
+	
 	<script>
 	$(document).ready(function()
 	{
@@ -196,6 +199,7 @@
 		
 		<?php showYardsBarChart(); ?>
 		<?php showPointsBarChart(); ?>
+		
 		
 		var ptsDone = false;
 		var ydsDone = false;
@@ -212,6 +216,10 @@
 				ydsDone = true;
 			}
 		});
+		
+		
+		var turnovers = <?php echo getTurnovers(); ?>;
+		showTurnoversPieChart(turnovers);
 
 	});
 	</script>

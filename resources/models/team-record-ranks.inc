@@ -14,7 +14,22 @@ $OFFENSE_VIEW = 'Offense2016_View';
 // Object Version (Newest)
 $db = new DB();
 
-
+function retrieveTurnovers($teamName)
+{
+	global $TEAM_GAME_VIEW;
+	global $db;
+	$query =   "SELECT plus.PlusFum AS PlusFum, plus.PlusInt AS PlusInt, n.NegFum AS NegFum, n.NegInt AS NegInt
+				FROM
+				(SELECT SUM(FL) AS PlusFum, SUM(Ints) AS PlusInt
+					FROM ".$TEAM_GAME_VIEW."
+					WHERE Opponent = '".$teamName."') AS plus,
+				(SELECT SUM(FL) AS NegFum, SUM(Ints) AS NegInt
+					FROM TeamGame2016_Summary
+    				WHERE Name = '".$teamName."') AS n";
+	
+	$result = $db -> select($query);
+	return $result;
+}
 
 function retrieveTeamTheme($teamName)
 {

@@ -254,12 +254,6 @@ div#yards-bar-chart
 
 
 
-#bar-test
-{
-	height: 300px;
-}
-
-
 
 .navbar-header a, .navbar-right a
 {
@@ -282,5 +276,11 @@ div#yards-bar-chart
 
 
 
-
-
+div#timelapse-chart
+{
+	height: 200px;
+}
+div#turnovers-pie-chart
+{
+	height: 200px;
+}
