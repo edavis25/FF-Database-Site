@@ -23,7 +23,7 @@ function showTurnoversPieChart(arr) {
 		'red' : '#dc030d',
 		'green' : '#00ba31'
 	},
-	categories = ['Turnovers<br />Lost', 'Turnovers<br />Gained'],
+	categories = ['Lost', 'Gained'],
 
 	// Data plot for turnovers lost
 	data = [{
@@ -59,7 +59,8 @@ function showTurnoversPieChart(arr) {
 		turnovers.push({
 			name : categories[i],
 			y : data[i].y,
-			color : data[i].color
+			color : data[i].color,
+			legendIndex : dataLen - i
 		});
 
 		// add outer pie data
@@ -104,6 +105,12 @@ function showTurnoversPieChart(arr) {
 		tooltip : {
 			//valueSuffix : '$'
 		},
+		legend : {
+			floating : true
+		},
+		credits : {
+			enabled : false
+		},
 		// Inner pie
 		series : [{
 			name : 'Total',
@@ -112,16 +119,18 @@ function showTurnoversPieChart(arr) {
 			dataLabels : {
 				// Inner hover label
 				formatter : function() {
-					return this.y > 1 ? this.point.name : null;
+					//return this.y > 1 ? this.point.name : null;
+					return this.y;
 				},
 				color : '#ffffff',
 				distance : -80,
-				backgroundColor : "rgba(0,0,0,0.1)",
+				//backgroundColor : "rgba(0,0,0,0.1)",
 				style : {
 					"fontSize" : "12px",
 					"textOutline" : "0px"
 				}
-			}
+			},
+			showInLegend: true
 		},
 		// Outer pie
 		{
@@ -133,7 +142,12 @@ function showTurnoversPieChart(arr) {
 			dataLabels : {
 				formatter : function() {
 					// display only if larger than 1
-					return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y : null;
+					//return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y : null;
+				},
+				distance : -15,
+				style : {
+					color : "#000000",
+					textOutline : "0px"
 				}
 			}
 		}]
