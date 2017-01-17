@@ -14,6 +14,23 @@ $OFFENSE_VIEW = 'Offense2016_View';
 // Object Version (Newest)
 $db = new DB();
 
+
+function retrieveAttendance($teamName)
+{
+	global $TEAM_GAME_VIEW;
+	global $db;
+	
+	$query =   "SELECT ROUND(AVG(Games.Attendance), 0) AS Attendance
+				FROM ".$TEAM_GAME_VIEW."
+				INNER JOIN Games ON Games.GameID = ".$TEAM_GAME_VIEW.".GameID
+				WHERE ".$TEAM_GAME_VIEW.".Home = 'Y'
+				AND ".$TEAM_GAME_VIEW.".Name = '".$teamName."'
+				GROUP BY TeamID";
+				
+	$result = $db -> select($query);
+	return $result;
+}
+
 function retrieveTurnovers($teamName)
 {
 	global $TEAM_GAME_VIEW;

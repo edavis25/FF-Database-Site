@@ -177,11 +177,17 @@ a
 
 div#win-loss-gauge
 {
-	width: 200px;
+	/* width: 200px; */
+	margin-right: 10px;
 	height: 120px; 
-	display: inline-block;
-	float: left;
-	margin-left: -10%;
+	/* display: inline-block; */
+	/* float: left; */
+	margin-left: -25%;
+}
+@media screen and (min-width: 480px) {
+	div#win-loss-gauge {
+		/* margin-left: -70px; */
+	}
 }
 
 div#yards-bar-chart

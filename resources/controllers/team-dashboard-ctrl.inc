@@ -13,6 +13,12 @@ $team = $_POST['team'];
 $record = getRecord($team);
 
 
+function getAttendance()
+{
+	global $team;
+	$attendance = retrieveAttendance($team);
+	return json_encode($attendance);
+}
 function getTeamTheme()
 {
 	global $team;	

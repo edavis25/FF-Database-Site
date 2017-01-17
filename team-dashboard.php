@@ -16,12 +16,29 @@
 
 	<!-- Row 1 (Team name + record) -->
 	<div class="row">
-    	<div class="col-xs-12 col-sm-5 col-md-4 col-xl-3">
-    		<h1><b><?php echo teamName(); ?></b> <small>Dashboard</small></h1>	
-        	<h3 class="team-record"><?php echo showRecord(); ?></h3>	
+    	<div class="container col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+    		<div class="row">
+    			<h1 class=""><b><?php echo teamName(); ?></b> <small class="hidden-xs hidden-sm">Dashboard</small></h1>	
+        		<h3 class="team-record"><?php echo showRecord(); ?></h3>
+        	</div>
         </div>
-        <div class="col-xs-12 col-sm-7 col-md-8 col-xl-9">
-        	<div class="col-xs-8 gauge" id="win-loss-gauge"></div>
+        <div class="container col-xs-6 col-sm-6 col-md-3 col-lg-2">
+        	<div class="gauge" id="win-loss-gauge"></div>
+        </div>
+        <div class="container col-xs-6 col-sm-6 col-md-3 col-lg-2">
+        	<h4 style="text-align: left;">Avg Attendance: 65,203</h4>
+        	<div style="margin-left: auto; margin-right: auto;">
+	        	<img src="img/person.svg" style="height: 50px; margin-right: -25px;" />
+        		<img src="img/person.svg" style="height: 50px; margin-right: -25px;" />
+        		<img src="img/person.svg" style="height: 50px; margin-right: -25px;" />
+        		<img src="img/person.svg" style="height: 50px; margin-right: -25px;" />
+        		<img src="img/person.svg" style="height: 50px; margin-right: -25px;" />
+        		<img src="img/person.svg" style="height: 50px; margin-right: -25px;" />
+        		<img src="img/half-person.svg" style="height: 50px; margin-right: -25px;" />
+        	</div>
+        </div>
+        <div class="container col-xs-6 col-sm-6 col-md-3 col-lg-2">
+        	<h2>Hello there</h2>
         </div>
 	</div> <!-- End Row 1 -->
 	
@@ -35,7 +52,7 @@
 			<div class="panel-body">
 				
 				<!-- Offense Rank -->
-				<div class="col-md-2 col-sm-4 col-xs-6 border-right">
+				<div class="col-md-2 col-sm-4 col-xs-4 border-right">
 					<div class="row">
 						<h1 class="ranking-value"><?php echo showOffRank(); ?></h1>
 					</div>
@@ -45,7 +62,7 @@
 				</div>
 				
 				<!-- Defense Rank -->
-				<div class="col-md-2 col-sm-4 col-xs-6 border-right">
+				<div class="col-md-2 col-sm-4 col-xs-4 border-right">
 					<div class="row">
 						<h1 class="ranking-value"><?php echo showDefRank(); ?></h1>
 					</div>
@@ -55,7 +72,7 @@
 				</div>
 				
 				<!-- Rush Rank -->
-				<div class="col-md-2 col-sm-4 col-xs-6 border-right">
+				<div class="col-md-2 col-sm-4 col-xs-4 border-right">
 					<div class="row">
 						<h1 class="ranking-value"><?php echo showRushRank(); ?></h1>
 					</div>
@@ -65,7 +82,7 @@
 				</div>
 				
 				<!-- Pass Rank -->
-				<div class="col-md-2 col-sm-4 col-xs-6 border-right">
+				<div class="col-md-2 col-sm-4 col-xs-4 border-right">
 					<div class="row">
 						<h1 class="ranking-value"><?php echo showPassRank(); ?></h1>
 					</div>
@@ -75,7 +92,7 @@
 				</div>
 				
 				<!-- Pass Rank -->
-				<div class="col-md-2 col-sm-4 col-xs-6 border-right">
+				<div class="col-md-2 col-sm-4 col-xs-4 border-right">
 					<div class="row">
 						<h1 class="ranking-value">1</h1>
 					</div>
@@ -85,7 +102,7 @@
 				</div>
 				
 				<!-- Pass Rank -->
-				<div class="col-md-2 col-sm-4 col-xs-6 border-right">
+				<div class="col-md-2 col-sm-4 col-xs-4 border-right">
 					<div class="row">
 						
 					</div>
@@ -186,7 +203,9 @@
 	<script src="js/team-turnovers-pie.js"></script>
 	
 	<script>
-	
+		
+		var arr1 = <?php echo getAttendance(); ?>;
+		alert(arr1[0]['Attendance']);
 	
 	</script>
 	
@@ -217,7 +236,7 @@
 			}
 		});
 		
-		
+		// Turnovers chart
 		var turnovers = <?php echo getTurnovers(); ?>;
 		showTurnoversPieChart(turnovers);
 
