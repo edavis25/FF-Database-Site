@@ -27,6 +27,9 @@
     <!-- Font Awesome -->
     <link href="resources/library/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"> 
+    
     <!-- Custom CSS -->
     <link href="css/ffdatabase.css" rel="stylesheet">
     <!-- link href="css/ffdatabase-alt.css" rel="stylesheet" -->

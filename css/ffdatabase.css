@@ -139,12 +139,14 @@ a
 {
 	font-size: 1.5em;
 	text-align: center;
+	font-family: 'Play', sans-serif;
 }
 .ranking-value 
 {
 	font-size: 3em;
 	font-weight: 600;
 	text-align: center;
+	font-family: 'Play', sans-serif;
 }
 
 .ranking-value h1 {

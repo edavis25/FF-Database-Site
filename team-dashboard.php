@@ -47,7 +47,7 @@
 	<div class="row">
 		<div class="panel bg-white">
 			<div class="panel-heading" id="league-ranks-heading">
-				<h3 class="panel-title">League Rankings</h3>		
+				<h3 class="panel-title"><i class="fa fa-fw fa-sort-amount-asc"></i> League Rankings</h3>		
 			</div>
 			<div class="panel-body">
 				
