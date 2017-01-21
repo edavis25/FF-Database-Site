@@ -209,6 +209,45 @@ function timelapseChart()
 }
 
 
+function showGauge(value, id, title)
+{
+	var gg1 = new JustGage
+	({
+   		id: id,
+   		value : value,
+  		min: 0,
+  		max: 100,
+   		decimals: 1,
+   		gaugeWidthScale: 1.1,
+  		title: title,
+   		customSectors: 
+   		[{
+     		color : "#dc030d",
+      		lo : 0,
+      		hi : 35
+   		},
+   		{
+  			color: "#ff6c0a",
+   			lo: 35,
+   			hi: 45
+   		},
+   		{
+     		color : "#ffdf02",
+     		lo : 45,
+       		hi : 55
+   		},      
+      	{
+      		color : "#00ba31",
+      		lo : 55,
+      		hi : 100
+      	}],
+      	counter: true
+    });
+}
+
+/**
+ *REPLACED 
+ */
 function winLossGauge(win, loss)
 {
 	try

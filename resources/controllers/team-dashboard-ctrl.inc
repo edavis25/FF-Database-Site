@@ -13,6 +13,13 @@ $team = $_POST['team'];
 $record = getRecord($team);
 
 
+function getHomeWins()
+{
+	global $team;
+	$homeRecord = retrieveHomeRecord($team);
+	return json_encode($homeRecord);
+}
+
 function getAttendance()
 {
 	global $team;
@@ -25,12 +32,22 @@ function getTeamTheme()
 	$colors  = retrieveTeamTheme($team);
 	return json_encode($colors);
 }
-
 function getTurnovers()
 {
 	global $team;
 	$turnovers = retrieveTurnovers($team);
 	return json_encode($turnovers);
+}
+
+/**
+ * Get 3rd downs. Returns an associate array with 1 row and 2 columns.
+ * Column names = '3rdM' and '3rdAtt' --> access like: $third[0]['3rdM']
+ */
+function get3rdDowns()
+{
+	global $team;
+	$thirds = retrieve3rdDowns($team);
+	return json_encode($thirds);
 }
 
 /*
@@ -42,10 +59,13 @@ function teamName()
 	return $team;
 }
 
+/**
+ * 'Won' or 'Lost'
+ */
 function getWinOrLoss($result)
 {
 	global $record;
-	return $record[0][$record];
+	return $record[0][$result];
 }
 
 function showYardsBarChart()
@@ -137,6 +157,7 @@ function yardsPer($num1, $num2)
 
 /**
  * Echo back the JavaScript function call for building the gauge
+ * CHECK FOR REMOVAL
  */
 function showGauge()
 {
@@ -179,4 +200,17 @@ function showPassRank()
 {
 	global $team;
 	return getPassRank($team);
+}
+
+function showPointsRank()
+{
+	global $team;
+	$pts = getPointsAllowedRank($team);
+	return $pts[0]['Rank'];
+}
+function showYardsRank()
+{
+	global $team;
+	$yds = getYardsAllowedRank($team);
+	return $yds[0]['Rank'];
 }

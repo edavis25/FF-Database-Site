@@ -15,7 +15,7 @@
  * =============
  * I. 	Body - Stylings for the page body
  * II.	Header & Nav - Stylings for the Header & NavBar
- * III. Content - Stylings for the page main content
+ * III. Team Dashboards - Stylings for Team Dashboard content
  * IV.	Homepage - Stylings specific to the homepage
  * V.	Generic - Generic stylings for any element
  * VI.  Bootstrap Overrides - Stylings to override Bootstrap defaults
@@ -125,14 +125,18 @@ a
 
 
 /* =============================================
- * ==  III. Content		========================
+ * ==  III. Team Dashboards ====================
  * ============================================= */
 
 /* Team Dashboard Stylings */
+.team-name-title
+{
+	margin-left: 15%;
+}
 
 #league-ranks-heading
 {
-	margin-bottom: -35px;
+	margin-bottom: -25px;
 }
  
 .ranking-label
@@ -141,6 +145,7 @@ a
 	text-align: center;
 	font-family: 'Play', sans-serif;
 }
+
 .ranking-value 
 {
 	font-size: 3em;
@@ -177,33 +182,43 @@ a
 	color: #ffdf02;
 }
 
-div#win-loss-gauge
-{
-	/* width: 200px; */
-	margin-right: 10px;
-	height: 120px; 
-	/* display: inline-block; */
-	/* float: left; */
-	margin-left: -25%;
-}
+
 @media screen and (min-width: 480px) {
-	div#win-loss-gauge {
-		/* margin-left: -70px; */
+	div.gauge {
+		margin-left: -25%;
 	}
 }
 
-div#yards-bar-chart
-{
-	/* height: 357px; */
+/* Chart sizes & styles */
+div.gauge {
+    height: 120px;
+}
+
+div#points-bar-chart {
+	height: 160px;
+	margin-top: -26px; 
+	margin-bottom: -18px"
+}
+
+div#yards-bar-chart {
 	height: 200px;
 	margin-top: -26px;
 	margin-bottom: -18px;
 }
 
-#offense-leaders-table
-{
+div#timelapse-chart {
+	height: 300px;
+}
+
+div#turnovers-pie-chart {
+	height: 300px;
+}
+
+#offense-leaders-table {
 	font-size: 11px;
 }
+
+
 /* =============================================
  * ==  IV. Homepage		========================
  * ============================================= */
@@ -263,6 +278,7 @@ div#yards-bar-chart
 
 
 
+
 .navbar-header a, .navbar-right a
 {
 	color: inherit !important;
@@ -283,12 +299,11 @@ div#yards-bar-chart
 }
 
 
+.person
+{
+	height: 50px;
+	margin-right: -50px;
+	margin-left: -45px;
+	left: 50%;
+}
 
-div#timelapse-chart
-{
-	height: 200px;
-}
-div#turnovers-pie-chart
-{
-	height: 200px;
-}

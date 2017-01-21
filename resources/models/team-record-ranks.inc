@@ -3,6 +3,8 @@
 include 'resources/models/db.inc';
 include 'resources/models/db2.inc';
 
+include 'resources/models/pdo.inc';
+
 // Global for DB
 $DB = getDB();
 
@@ -14,6 +16,106 @@ $OFFENSE_VIEW = 'Offense2016_View';
 // Object Version (Newest)
 $db = new DB();
 
+
+
+
+/*
+ * Yet another type of DB connection :)
+ * I'm still trying to learn new things, sorry :(
+ */
+function retrieveHomeRecord($teamName)
+{
+	global $TEAM_GAME_VIEW;
+	global $pdo;
+	
+	$sql = "SELECT Home FROM $TEAM_GAME_VIEW WHERE Name = :name";
+    
+    $sql = 	 "SELECT 
+				(SELECT COUNT(*) FROM $TEAM_GAME_VIEW
+   				 	WHERE Name = :name AND Home = 'Y' AND Won = 'Y') AS Won,
+   				(SELECT COUNT(*) FROM $TEAM_GAME_VIEW
+    				WHERE Name = :name AND Home = 'Y') AS Home";
+    
+    $statement = $pdo -> prepare($sql);
+    $statement -> bindParam(':name', $teamName);
+    $statement -> execute();
+    return $statement -> fetchAll(PDO::FETCH_ASSOC);	
+
+}
+
+
+function getPointsAllowedRank($teamName)
+{
+	global $TEAM_GAME_VIEW;
+	global $pdo;
+	
+	$state = $pdo -> query('SELECT @idx := 0');
+	
+	$sql = "SELECT Rank
+			FROM
+			(SELECT 
+				@idx := @idx+1 AS Rank,
+				Name
+			FROM
+				(SELECT
+					Name,
+					SUM(OppScore) AS OppScore
+				FROM $TEAM_GAME_VIEW
+				GROUP BY TeamID
+				ORDER BY OppScore ASC
+				) innerTbl
+			) outerTbl
+		WHERE Name = :name";
+	
+	$statement = $pdo -> prepare($sql);
+    $statement -> bindParam(':name', $teamName);
+	$statement -> execute();
+	return $statement -> fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function getYardsAllowedRank($teamName)
+{
+	global $TEAM_GAME_VIEW;
+	global $pdo;
+	
+	$state = $pdo -> query('SELECT @idx := 0');
+	$sql = "SELECT Rank
+			FROM
+			(SELECT 
+				@idx := @idx+1 AS Rank,
+				Opponent
+			FROM
+				(SELECT Opponent, (SUM(NetPassYds) + SUM(RushYds)) AS Total
+				FROM $TEAM_GAME_VIEW
+            	GROUP BY Opponent
+            	ORDER BY Total ASC
+			) innerTbl
+		) outerTbl
+    WHERE Opponent = :name";
+	
+	$statement = $pdo -> prepare($sql);
+	$statement -> bindParam(':name', $teamName);
+	$statement -> execute();
+	return $statement -> fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+
+
+function retrieve3rdDowns($teamName)
+{
+	global $TEAM_GAME_VIEW;
+	global $db;
+	
+	$query =   "SELECT SUM(3rdM) AS 3rdM, SUM(3rdAtt) AS 3rdAtt
+				FROM ".$TEAM_GAME_VIEW."
+				WHERE Name = '".$teamName."'";
+	
+	$result = $db -> select($query);
+	return $result;
+}
 
 function retrieveAttendance($teamName)
 {
@@ -226,6 +328,8 @@ function getPassRank($teamName)
 	$rows = $db -> select($query);
 	return $rows[0]['Rank'];
 }
+
+
 	
 /**
  * 
