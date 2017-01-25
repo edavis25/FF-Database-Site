@@ -1,261 +1,316 @@
-<!DOCTYPE html>
-<html>
-	<!-- Get head info -->
-	<?php require_once 'resources/templates/header.php'; ?>
+<?php
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
 
-	<!-- Get the Navbar -->
-	<?php require_once 'resources/templates/navigation.php'; ?>
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-	<!-- =============================================
-	========== MAIN PAGE CONTENT =====================
-	================================================== -->
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
+{
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
 
-	<?php include 'resources/models/db.inc'; ?>
-	<!-- Page Heading -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header"> Team Name <small>Dashboard</small></h1>
-		</div>
-	</div>
-	<!-- /.row -->
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
 
-	<div class="row pad-bottom-10" id="league-ranks">
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
 
-		<h3 style="border-bottom: 1px solid #e7e7e7;" class="pad-left">League Rankings</h3>
-		<!-- Container 1 -->
-		<div class="col-md-2 col-sm-4 col-xs-6 border-right">
-			<div class="row">
-				<!-- h1 class="ranking-label"><b>OFF</b>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: green; font-weight: 600; font-size: 150%;">5</span></h1 -->
-				<h1 class="ranking-value" style="color: green; font-family: times;">6</h1>
-			</div>
-			<div class="row">
-				<p class="ranking-label" style="text-align: center;">
-					Offense
-				</p>
-			</div>
+/*
+ *---------------------------------------------------------------
+ * SYSTEM DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" directory.
+ * Set the path if it is not in the same directory as this file.
+ */
+	$system_path = 'system';
 
-		</div>
+/*
+ *---------------------------------------------------------------
+ * APPLICATION DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * directory than the default one you can set its name here. The directory
+ * can also be renamed or relocated anywhere on your server. If you do,
+ * use an absolute (full) server path.
+ * For more info please see the user guide:
+ *
+ * https://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
 
-		<!-- Container 2 -->
-		<div class="col-md-2 col-sm-4 col-xs-6 border-right">
-			<div class="row">
-				<!-- h1 class="ranking-label"><b>OFF</b>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: green; font-weight: 600; font-size: 150%;">5</span></h1 -->
-				<h1 class="ranking-value" style="color: red;">23</h1>
-			</div>
-			<div class="row">
-				<p class="ranking-label" style="text-align: center;">
-					Defense
-				</p>
-			</div>
-		</div>
+/*
+ *---------------------------------------------------------------
+ * VIEW DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view directory out of the application
+ * directory, set the path to it here. The directory can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application directory.
+ * If you do move this, use an absolute (full) server path.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
 
-		<!-- Container 3 -->
-		<div class="col-md-2 col-sm-4 col-xs-6 border-right">
-			<div class="row">
-				<!-- h1 class="ranking-label"><b>OFF</b>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: green; font-weight: 600; font-size: 150%;">5</span></h1 -->
-				<h1 class="ranking-value" style="color: #dbd700;">13</h1>
-			</div>
-			<div class="row">
-				<p class="ranking-label" style="text-align: center;">
-					Rushing
-				</p>
-			</div>
-		</div>
 
-		<!-- Container 4 -->
-		<div class="col-md-2 col-sm-4 col-xs-6 border-right">
-			<div class="row">
-				<!-- h1 class="ranking-label"><b>OFF</b>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: green; font-weight: 600; font-size: 150%;">5</span></h1 -->
-				<h1 class="ranking-value" style="color: green;">3</h1>
-			</div>
-			<div class="row">
-				<p class="ranking-label" style="text-align: center;">
-					Passing
-				</p>
-			</div>
-		</div>
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" directory.  Leave blank
+	// if your controller is not in a sub-directory within the "controllers" one
+	// $routing['directory'] = '';
 
-		<!-- Container 5 -->
-		<div class="col-md-2 col-sm-4 col-xs-6 border-right">
-			<div class="row">
-				<!-- h1 class="ranking-label"><b>OFF</b>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: green; font-weight: 600; font-size: 150%;">5</span></h1 -->
-				<h1 class="ranking-value" style="color: green;">67%</h1>
-			</div>
-			<div class="row">
-				<p class="ranking-label" style="text-align: center;">
-					Win %
-				</p>
-			</div>
-		</div>
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
 
-		<!-- Container 6 -->
-		<div class="col-md-2 col-sm-4 col-xs-6">
-			<div class="row">
-				<!-- h1 class="ranking-label"><b>OFF</b>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: green; font-weight: 600; font-size: 150%;">5</span></h1 -->
-				<h1 class="ranking-value">23</h1>
-			</div>
-			<div class="row">
-				<p class="ranking-label" style="text-align: center;">
-					Offense
-				</p>
-			</div>
-		</div>
-	</div>
-	<!-- /.End top container row -->
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
 
-	<div class="row v-margin-15">
-		<div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Current Season</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-xs-12 col-sm-8 border-right">
-							<div id="tester"></div>
-						</div>
-						<div class="col-xs-12 col-sm-4">
-							<p>
-								This will be the key/checkboxes
-							</p>
-						</div>
-					</div>
-					<!-- div id="morris-area-chart"></div -->
 
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.row -->
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-	<!-- 3rd Row -->
-	<div class="row">
 
-		<div class="col-lg-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"><i class="glyphicon glyphicon-align-left"></i> Season Totals</h3>
-				</div>
-				<div class="panel-body">
-					<div id="bar-test"></div>
-					<div class="text-right">
-						<a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
 
-					</div>
-				</div>
-			</div>
-		</div>
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
 
-		<div class="col-lg-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Season Leaders</h3>
-				</div>
-				<div class="panel-body">
-					<div class="list-group">
-						<a href="#" class="list-group-item"> <span class="badge">just now</span> <i class="fa fa-fw fa-calendar"></i> Calendar updated </a>
-						<a href="#" class="list-group-item"> <span class="badge">4 minutes ago</span> <i class="fa fa-fw fa-comment"></i> Commented on a post </a>
-						<a href="#" class="list-group-item"> <span class="badge">23 minutes ago</span> <i class="fa fa-fw fa-truck"></i> Order 392 shipped </a>
-						<a href="#" class="list-group-item"> <span class="badge">46 minutes ago</span> <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid </a>
-						<a href="#" class="list-group-item"> <span class="badge">1 hour ago</span> <i class="fa fa-fw fa-user"></i> A new user has been added </a>
-						<a href="#" class="list-group-item"> <span class="badge">2 hours ago</span> <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning" </a>
-						<a href="#" class="list-group-item"> <span class="badge">yesterday</span> <i class="fa fa-fw fa-globe"></i> Saved the world </a>
-						<a href="#" class="list-group-item"> <span class="badge">two days ago</span> <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page" </a>
-					</div>
-					<div class="text-right">
-						<a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
 
-		<div class="col-lg-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions Panel</h3>
-				</div>
-				<div class="panel-body">
-					<div class="table-responsive">
-						<table class="table table-bordered table-hover table-striped">
-							<thead>
-								<tr>
-									<th>Order #</th>
-									<th>Order Date</th>
-									<th>Order Time</th>
-									<th>Amount (USD)</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>3326</td>
-									<td>10/21/2013</td>
-									<td>3:29 PM</td>
-									<td>$321.33</td>
-								</tr>
-								<tr>
-									<td>3325</td>
-									<td>10/21/2013</td>
-									<td>3:20 PM</td>
-									<td>$234.34</td>
-								</tr>
-								<tr>
-									<td>3324</td>
-									<td>10/21/2013</td>
-									<td>3:03 PM</td>
-									<td>$724.17</td>
-								</tr>
-								<tr>
-									<td>3323</td>
-									<td>10/21/2013</td>
-									<td>3:00 PM</td>
-									<td>$23.71</td>
-								</tr>
-								<tr>
-									<td>3322</td>
-									<td>10/21/2013</td>
-									<td>2:49 PM</td>
-									<td>$8345.23</td>
-								</tr>
-								<tr>
-									<td>3321</td>
-									<td>10/21/2013</td>
-									<td>2:23 PM</td>
-									<td>$245.12</td>
-								</tr>
-								<tr>
-									<td>3320</td>
-									<td>10/21/2013</td>
-									<td>2:15 PM</td>
-									<td>$5663.54</td>
-								</tr>
-								<tr>
-									<td>3319</td>
-									<td>10/21/2013</td>
-									<td>2:13 PM</td>
-									<td>$943.45</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="text-right">
-						<a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.row -->
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
 
-	<!-- Set active tab -->
-	<script>
-		$("#home").css('background-color', '#e7e7e7', '!important');
-		
-		// Change the color of the <li> container class - the anchor tag text inherits this color
-		//var active = document.getElementsByClassName("active-container");
-		//$(active[0]).css('color', '#337ab7', '!important');
-	</script>
-	
-	<?php
-	require_once 'resources/templates/footer.php';
- ?>
-</html>
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = strtr(
+			rtrim($system_path, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		).DIRECTORY_SEPARATOR;
+	}
+
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// Path to the system directory
+	define('BASEPATH', $system_path);
+
+	// Path to the front controller (this file) directory
+	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+	// Name of the "system" directory
+	define('SYSDIR', basename(BASEPATH));
+
+	// The path to the "application" directory
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+		else
+		{
+			$application_folder = strtr(
+				rtrim($application_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+	{
+		$application_folder = BASEPATH.strtr(
+			trim($application_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+
+	// The path to the "views" directory
+	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.'views';
+	}
+	elseif (is_dir($view_folder))
+	{
+		if (($_temp = realpath($view_folder)) !== FALSE)
+		{
+			$view_folder = $_temp;
+		}
+		else
+		{
+			$view_folder = strtr(
+				rtrim($view_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.strtr(
+			trim($view_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
+

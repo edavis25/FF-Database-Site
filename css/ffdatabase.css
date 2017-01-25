@@ -195,13 +195,14 @@ div.gauge {
 }
 
 div#points-bar-chart {
-	height: 160px;
+	height: 180px;
 	margin-top: -26px; 
-	margin-bottom: -18px"
+	margin-bottom: -18px;
 }
 
 div#yards-bar-chart {
-	height: 200px;
+	display: block;
+        height: 420px;
 	margin-top: -26px;
 	margin-bottom: -18px;
 }
@@ -222,8 +223,12 @@ div#turnovers-pie-chart {
 /* =============================================
  * ==  IV. Homepage		========================
  * ============================================= */
-
-
+#site-subtitle
+{
+}
+.page-header {
+    margin: 0;
+}
 
 /* =============================================
  * ==  V. Generic		========================
