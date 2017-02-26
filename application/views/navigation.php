@@ -224,7 +224,7 @@
             </li>
 
             <li class="active-container">
-                <a href="bootstrap-elements.html"><i class="fa fa-fw fa-database"></i> Custom Query</a>
+                <a href="<?php echo base_url('custom_query/query') ?>"><i class="fa fa-fw fa-database"></i> Custom Query</a>
             </li>
 
             <li class="active-container">

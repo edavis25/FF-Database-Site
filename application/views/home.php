@@ -21,7 +21,7 @@
     
     
     
-    <div class="container col-xs-4">
+    <div class="container col-sm-6 col-md-4">
         <div class="panel">
             <div class="panel-heading">
                 <i class="fa fa-info" aria-hidden="true"></i> <b>About the Project</b>
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div class="container col-xs-4">
+    <div class="container col-sm-6 col-md-4">
         <div class="panel">
             <div class="panel-heading">
                 <i class="fa fa-fw fa-dashboard"></i> <b>Dynamic Team Dashboards</b>
@@ -56,7 +56,7 @@
     </div>
     
     
-    <div class="container col-xs-4">
+    <div class="container col-sm-6 col-md-4">
         <div class="panel">
             <div class="panel-heading">
                 Panel 3 Header
