@@ -21,16 +21,15 @@
 <div class="tab-content">
 	<!-- Game info tab -->
 	<div class="tab-pane active" id="game-info">
-		<p>Fill out the form below</p>
+		<p>Filters applied to selected teams.</p>
 		<form id="game-form">
 			<fieldset>
+				
 				<!-- Form Row 1 -->
 				<div class="row">
 					<!-- Team selection box -->
 					<div class="form-group col-lg-3">
-						
-						<input type="text" name="test" id="test" />
-						
+												
 						<label for="select-team" class="control-label">Team</label>
 						<select multiple="" id="select-team" name="select-team[]" class="form-control" size="5">
 							<option value="%">Select ALL</option><option value="Cardinals">Arizona Cardinals</option>
@@ -204,7 +203,7 @@
 
 				<!-- Form Row 3 -->
 				<div class="row">
-					<input type="button" id="" onclick="gameInfoQuery('<?php echo base_url().'custom_query/display_results' ?>')" name="submit-button" class="btn btn-success col-lg-3 audiowide-font submit-button" value="Run Query" />
+					<input type="button" id="game-query-submit" onclick="gameInfoQuery('<?php echo base_url().'custom_query/display_results' ?>')" name="submit-button" class="btn btn-success col-lg-3 audiowide-font submit-button" value="Run Query" />
 					<input type="button" id="" name="clear-button" class="btn btn-danger col-lg-3 col-lg-offset-1 audiowide-font clear-button" value="Clear All" />
 				</div>
 			</fieldset>

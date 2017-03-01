@@ -1,3 +1,7 @@
+
+/**
+ * This function is called from the custom query submit button onclick event. 
+ */
 function gameInfoQuery(url) {
 
 	/*

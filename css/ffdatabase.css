@@ -19,6 +19,7 @@
  * IV.	Homepage - Stylings specific to the homepage
  * V.	Generic - Generic stylings for any element
  * VI.  Bootstrap Overrides - Stylings to override Bootstrap defaults
+ * VII. Custom Queries
  * 
  =================================================================== */
 
@@ -230,6 +231,7 @@ div#turnovers-pie-chart {
     margin: 0;
 }
 
+
 /* =============================================
  * ==  V. Generic		========================
  * ============================================= */
@@ -279,6 +281,19 @@ div#turnovers-pie-chart {
 {
 	/* background-color: #ffffff !important; */
 }
+
+
+/* =============================================
+ * ==  VII. Custom Queries   ===================
+ * ============================================= */
+
+/* Query type tabs background color */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li:hover > a {
+    background-color: #0a0044;
+    color: white;
+}
+
+
 
 
 
