@@ -27,21 +27,9 @@
 				
 				<!-- Form Row 1 -->
 				<div class="row">
-					<!-- Team selection box -->
-					<div class="form-group col-lg-3">
-												
-						<label for="select-team" class="control-label">Team</label>
-						<select multiple="" id="select-team" name="select-team[]" class="form-control" size="5">
-							<option value="%">Select ALL</option><option value="Cardinals">Arizona Cardinals</option>
-							<option value="Falcons">Atlanta Falcons</option><option value="Ravens">Baltimore Ravens</option><option value="Bills">Buffalo Bills</option><option value="Panthers">Carolina Panthers</option>
-							<option value="Bears">Chicago Bears</option><option value="Bengals">Cincinnati Bengals</option><option value="Browns">Cleveland Browns</option><option value="Cowboys">Dallas Cowboys</option>
-							<option value="Broncos">Denver Broncos</option><option value="Lions">Detroit Lions</option><option value="Packers">Green Bay Packers</option><option value="Texans">Houston Texans</option>
-							<option value="Colts">Indianapolis Colts</option><option value="Jaguars">Jacksonville Jaguars</option><option value="Chiefs">Kansas City Chiefs</option><option value="Rams">Los Angeles Rams</option>
-							<option value="Dolphins">Miami Dolphins</option><option value="Vikings">Minnesota Vikings</option><option value="Patriots">New England Patriots</option><option value="Saints">New Orleans Saints</option>
-							<option value="Giants">New York Giants</option><option value="Jets">New York Jets</option><option value="Raiders">Oakland Raiders</option><option value="Eagles">Philadelphia Eagles</option>
-							<option value="Steelers">Pittsburgh Steelers</option><option value="Chargers">San Diego Chargers</option><option value="49ers">San Francisco 49ers</option><option value="Seahawks">Seattle Seahawks</option>
-							<option value="Buccaneers">Tampa Bay Buccaneers</option><option value="Titans">Tennessee Titans</option><option value="Redskins">Washington Redskins</option>
-						</select>
+					<!-- Import Team selection box -->
+					<div class="form-group col-lg-3">				
+						<?php require_once 'team-selectbox.html'; ?>
 					</div>
 
 					<!-- Week Select Boxes -->
@@ -203,7 +191,7 @@
 
 				<!-- Form Row 3 -->
 				<div class="row">
-					<input type="button" id="game-query-submit" onclick="gameInfoQuery('<?php echo base_url().'custom_query/display_results' ?>')" name="submit-button" class="btn btn-success col-lg-3 audiowide-font submit-button" value="Run Query" />
+					<input type="button" id="game-query-submit" onclick="gameInfoQuery('<?php echo base_url().'custom_query/display_game_results' ?>')" name="submit-button" class="btn btn-success col-lg-3 audiowide-font submit-button" value="Run Query" />
 					<input type="button" id="" name="clear-button" class="btn btn-danger col-lg-3 col-lg-offset-1 audiowide-font clear-button" value="Clear All" />
 				</div>
 			</fieldset>
@@ -230,3 +218,20 @@
 <div id="output-table">
 	<h1>Output</h1>
 </div>
+
+<!-- Event handlers and ready scripts -->
+<script>
+	$(document).ready(function() {
+		
+		// Event handlers
+		$("#start-year").on("change", function() {
+			populateEndBox("start-year", "end-year", "allYears", 1, true);				
+		});
+		
+		$("#start-week").on("change", function() {
+			populateEndBox("start-week", "end-week", 0, 20, false);
+		});
+	
+	});
+</script>
+
