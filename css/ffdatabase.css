@@ -293,6 +293,9 @@ div#turnovers-pie-chart {
     color: white;
 }
 
+td {
+	white-space: nowrap;
+}
 
 
 

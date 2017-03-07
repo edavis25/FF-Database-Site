@@ -16,7 +16,6 @@ Class Custom_query_model extends CI_Model {
 				OUResult LIKE ? AND
 				Week BETWEEN ? AND ? AND
 				Date BETWEEN ? AND ?
-				LIMIT ?
 				";
 		
 		// Create variable binding array
@@ -30,19 +29,18 @@ Class Custom_query_model extends CI_Model {
 			$data['StartWeek'],
 			$data['EndWeek'],
 			$data['StartDate'],
-			$data['EndDate'],
-			10
+			$data['EndDate']
 		);
 		
 		$query = $this->db->query($sql, $binds);
 
 		
 		// Build query testing (return SQL as string)
-		$arr = array(array($this->db->last_query()));
-		return $arr;
+		//$arr = array(array($this->db->last_query()));
+		//return $arr;
 		
 		// WORKING RESULTS RETURN -->
-        //return $query->result_array();
+        return $query->result_array();
 	}
 	
 	/*
