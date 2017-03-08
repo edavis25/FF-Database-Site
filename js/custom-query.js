@@ -4,27 +4,9 @@
  */
 function gameInfoQuery(url) {
 
-	/*
-	var teamNames = getSelectedOptions("select-team");
-	var teamNamesJSON = JSON.stringify(teamNames);
-	var wonLost = getRadioSelected("won-radios");
-	var roof = getRadioSelected("roof-radios");
-	var surface = getRadioSelected("surface-radios");
-	var spread = getRadioSelected("spread-radios");
-	var overUnder = getRadioSelected("overUnder-radios");
-	var startWeek = document.getElementById("start-week").value;
-	var endWeek = document.getElementById("end-week").value;
-	var startYear = document.getElementById("start-year").value;
-	var endYear = document.getElementById("end-year").value;
-	*/
-	
-	// Build URL parameter string for PHP script
-	
-	//var phpVars = "?teamNames="+teamNamesJSON+ "&wonLost="+ wonLost+ "&roof="+roof +"&surface="+surface +"&spread="
-	//							+ spread +"&overUnder="+ overUnder+ "&start="+startWeek +"&end="+endWeek +"&startYear="+startYear +"&endYear="+endYear;
-	
-	
 	// Loader GIF
+	
+	
 	//document.getElementById("output-table").innerHTML = "<img src=\"img/loader-red.gif\" />";
 	var xhttp = new XMLHttpRequest();
 	

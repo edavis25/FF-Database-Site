@@ -191,7 +191,8 @@
 
 				<!-- Form Row 3 -->
 				<div class="row">
-					<input type="button" id="game-query-submit" onclick="gameInfoQuery('<?php echo base_url().'custom_query/display_game_results' ?>')" name="submit-button" class="btn btn-success col-lg-3 audiowide-font submit-button" value="Run Query" />
+					<!-- input type="button" id="game-query-submit" onclick="gameInfoQuery('<?php echo base_url().'custom_query/display_game_results' ?>')" name="submit-button" class="btn btn-success col-lg-3 submit-button" value="Run Query" / -->
+					<input type="button" id="game-query-submit" name="submit-button" class="btn btn-success col-lg-3 submit-button" value="Run Query" />
 					<input type="button" id="" name="clear-button" class="btn btn-danger col-lg-3 col-lg-offset-1 audiowide-font clear-button" value="Clear All" />
 				</div>
 			</fieldset>
@@ -213,8 +214,10 @@
 			yellow yellow yellow yellow yellow
 		</p>
 	</div>
-</div>
+</div> <!-- End tab content wrapper (all tabs) -->
 
+
+<span id="load" style="display: none;"><img src="<?php echo base_url(); ?>img/ajax-loader-arrows.gif" /></span>
 <div id="output-table">
 	<h1>Output</h1>
 </div>
@@ -223,13 +226,28 @@
 <script>
 	$(document).ready(function() {
 		
-		// Event handlers
+		/**
+		* Event Handlers 
+		*/
+		// End year/week dropdown population
 		$("#start-year").on("change", function() {
 			populateEndBox("start-year", "end-year", "allYears", 1, true);				
 		});
 		
 		$("#start-week").on("change", function() {
 			populateEndBox("start-week", "end-week", 0, 20, false);
+		});
+		
+		// Query submit button
+		$("#game-query-submit").on("click", function(){
+			//document.getElementById('load').innerHTML = 'TEST';//'<img src="img/arizona-55.png" alt="img" />'; //"<img src='img/ajax-loader-arrows.gif' />";
+			$("#load").show();
+			
+			setTimeout(function() {
+			gameInfoQuery('<?php echo base_url().'custom_query/display_game_results' ?>');
+			}, 999);
+			
+			//$("#load").hide();
 		});
 	
 	});
