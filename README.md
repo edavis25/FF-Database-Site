@@ -9,9 +9,9 @@ Custom Queries:
 - [ ] Add player stats tab (custom query)
 - [x] ~~Add export table to CSV functionality~~
 - [ ] Make tables sortable
-- [ ] Implement 'Clear All' form button functionality
+- [x] ~~Implement 'Clear All' form button functionality~~
 - [ ] Add date box filters to custom query form (disables year/week)
-- [ ] Change query from * to only desired fields (custom query aka remove ID fields)
+- [x] ~~Change query from * to only desired fields (custom query aka remove ID fields)~~
 - [ ] Create custom query visualizations
 
 General:
