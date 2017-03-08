@@ -7,7 +7,7 @@ Front-end web dashboard for Fantasy-Football-Database.
 Custom Queries:
 - [ ] Add team stats tab (custom query)
 - [ ] Add player stats tab (custom query)
-- [ ] Add export table to CSV functionality
+- [x] Add export table to CSV functionality
 - [ ] Make tables sortable
 - [ ] Implement 'Clear All' form button functionality
 - [ ] Add date box filters to custom query form (disables year/week)
