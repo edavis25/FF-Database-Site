@@ -268,6 +268,9 @@ div#turnovers-pie-chart {
 	background-color: #ffffff;
 }
 
+.inline {
+	display: inline;
+}
 
 /* =============================================
  * ==  VI. Bootstrap Overrides  ================
@@ -276,10 +279,15 @@ div#turnovers-pie-chart {
 .panel
 {
 	border-radius: 0px;
+	border: 1px solid #0a0044;
 }
 .panel-heading
 {
-	/* background-color: #ffffff !important; */
+	/*
+	background-color: #0a0044;
+	color: white;
+	*/
+	border-bottom: 1px solid #0a0044;
 }
 
 
@@ -293,9 +301,16 @@ div#turnovers-pie-chart {
     color: white;
 }
 
+/* Force table cell data to 1 lin<span id="load" style="display: none;"><img src="<?php echo base_url(); ?>img/ajax-loader-arrows.gif" /></span>e */
 td {
 	white-space: nowrap;
 }
+
+#output-csv {
+	margin-left: 20px;
+	height: 40px;
+}
+
 
 
 

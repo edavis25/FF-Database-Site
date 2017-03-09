@@ -2,14 +2,16 @@
 
 Class Custom_query_model extends CI_Model {
 		
-	// Global variable for the DB's Game View
+	// Global variables for the DB table/views
 	private $GAME_VIEW = 'Games_View';
+	private $TEAM_VIEW = 'TeamGame_View';
 	
 	function gameQuery($data) {
 
-		$sql = "SELECT * FROM $this->GAME_VIEW WHERE
-				Winner IN ? OR
-				Loser IN ? AND
+		$sql = "SELECT Date, Week, Day, Time, Winner, Loser, WinScore, LoseScore, Duration, Stadium, Attendance, Roof, Surface, Temp, Humidity, Wind, Favored, Spread, SpreadCovered, OULine, OUResult
+				FROM $this->GAME_VIEW WHERE
+				(Winner IN ? OR
+				Loser IN ?) AND
 				Roof LIKE ? AND
 				Surface LIKE ? AND
 				SpreadCovered LIKE ? AND
@@ -41,6 +43,22 @@ Class Custom_query_model extends CI_Model {
 		
 		// WORKING RESULTS RETURN -->
         return $query->result_array();
+	}
+	
+	function teamQuery($data) {
+		$sql = "SELECT Name, Date, Week, Day, Time, Won, Opponent, TotalScore, OppScore, Duration, Stadium, Home, Roof, Surface, Temp, Humidity, Wind,
+					1stDowns, RushAtt, RushYds, RushTds, PassComp, PassAtt, PassYds, PassTds, Ints, SkTaken, SkYds, NetPassYds, TotalYds, Fmb, FL, Turnovers, Pen, PenYds,
+					3rdM, 3rdAtt, 4thM, 4thAtt, TOP, Q1, Q2, Q3, Q4, OT
+				FROM $this->TEAM_VIEW WHERE
+				Name IN ?  
+				LIMIT 10";
+		
+		$binds = array(
+			$data['Teams']
+		);
+		
+		$query = $this->db->query($sql, $binds);
+		return $query->result_array();
 	}
 	
 	/*

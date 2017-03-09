@@ -1,7 +1,6 @@
-<h1>Query Results</h1>
 <h4>Number of results: <?php echo sizeof($data); ?></h4>
 <div class="table-responsive">
-<table class="table table-hover table-striped">
+<table id="query-results-table" class="table table-hover table-striped">
 	<!-- Print column headers -->
 	<tr>
 		<?php

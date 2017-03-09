@@ -11,7 +11,7 @@
         </button>	
 
         <!-- Logo and title (also team images for dashboard)-->
-        <a class="navbar-brand" href="index.php" id="logo"><b><i>Saber-skeptics</i></b></a>
+        <a class="navbar-brand" href="<?php echo base_url(); ?>" id="logo"><b><i>Saber-skeptics</i></b></a>
         <img src="" class="img" id="team-logo" />
 
     </div>
@@ -97,7 +97,7 @@
         <ul class="nav navbar-nav side-nav bg-swap">
 
             <li class="active-container">
-                <a href="index.php" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
+                <a href="<?php echo base_url(); ?>" id="home"><i class="fa fa-fw fa-home"></i> Home</a>
             </li>
 
             <li class="active-container">

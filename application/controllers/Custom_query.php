@@ -13,6 +13,27 @@ class Custom_query extends CI_Controller {
 		$this->load->view('custom_query_view', $data);
 	}
 	
+	public function display_team_stats_results() {
+		// Load model + build array for the SQL query
+		$this->load->model('Custom_query_model');
+		
+		$input = array();
+		
+		// Get selected teams as array
+		$teamArr = $this->input->post('select-team');
+		// If no team selected -OR- "Select ALL" option checked, get all team names as array
+		if (!$teamArr || $teamArr[0] == '%') {
+			$teamArr = $this->Custom_query_model->selectAllTeamNames();
+		}
+		$input['Teams'] = $teamArr;
+		
+		// Run query and retrieve results
+		$data['data'] = $this->Custom_query_model->teamQuery($input);
+		
+		// Load results table
+		$this->load->view('query_results_view', $data);
+	}
+	
 	
 	/**
 	 * This function is called from an AJAX request in "custom-query.js"
@@ -74,7 +95,6 @@ class Custom_query extends CI_Controller {
 		else {
 			$input['EndWeek'] = safeParam($_POST, 'end-week', false);
 		} 
-		
 		
 		// Run query and retrieve results
 		$data['data'] = $this->Custom_query_model->gameQuery($input);
